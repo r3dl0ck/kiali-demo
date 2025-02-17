@@ -1,0 +1,23 @@
+[project]
+name = "kiali-app"
+version = "0.1.0"
+description = "Simple Kiali demo"
+readme = "README.md"
+authors = [
+    { name = "Marcin Witowski", email = "mars3n@protonmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.0",
+    "requests>=2.32.3",
+]
+
+[project.scripts]
+czech-app = "kiali_app:czech.main"
+spanish-app = "kiali_app:spanish.main"
+english-app = "kiali_app:english.main"
+greet-app = "kiali_app:greet.main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
