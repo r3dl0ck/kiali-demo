@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 english_app = Flask(__name__)
 
 def hello():
-    return "Hello World!"
+    return "Howdy!"
 
 @english_app.route("/")
 def english_hello():

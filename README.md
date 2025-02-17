@@ -32,3 +32,10 @@ Greet app: Hello World! | Hello Mundo! | Ahoj světe!
 $ curl localhost:8080/chained
 Chained: Hello World! -> Hello Mundo! -> Ahoj světe!
 ```
+
+## Build container image
+
+```
+$ docker build . -t docker.io/devopstestaccount/kialidemo:1.0
+$ docker push docker.io/devopstestaccount/kialidemo:1.0
+```
