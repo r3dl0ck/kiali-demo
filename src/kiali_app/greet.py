@@ -32,12 +32,6 @@ def greet_all():
 @greet_api_app.route("/chained")
 def greet_chained():
     try:
-       czech_response = requests.get(CZECH_SVC)
-       czech_message = czech_response.text
-
-       spanish_response = requests.get(SPANISH_SVC + "chained")  # Call chained Spanish
-       spanish_message = spanish_response.text
-
        english_response = requests.get(ENGLISH_SVC + "chained")  # Call chained English
        english_message = english_response.text
 
@@ -80,6 +74,8 @@ def main() -> None:
     # Configure logging
     logging.basicConfig(level=args.log_level)
     logger = logging.getLogger(__name__)
+
+    logger.info(f"Starting: spanish_svc={args.spanish_svc}, english_svc={args.english_svc}, czech_svc={args.czech_svc}")
 
     global SPANISH_SVC
     global ENGLISH_SVC
