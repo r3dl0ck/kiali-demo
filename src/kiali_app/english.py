@@ -12,6 +12,11 @@ english_app = Flask(__name__)
 def hello():
     return "Hello World!"
 
+
+@english_app.route("/health")
+def health():
+    return "Healthy\n"
+
 @english_app.route("/")
 def english_hello():
     return hello()

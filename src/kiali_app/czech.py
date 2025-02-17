@@ -9,6 +9,10 @@ logger = logging.getLogger(__name__)
 # Czech App
 czech_app = Flask(__name__)
 
+@czech_app.route("/health")
+def health():
+    return "Healthy\n"
+
 @czech_app.route("/")
 def czech_hello():
     return "Ahoj světe!"

@@ -7,6 +7,10 @@ import argparse
 # Main Greeting API App
 greet_api_app = Flask(__name__)
 
+@greet_api_app.route("/health")
+def health():
+    return "Healthy\n"
+
 @greet_api_app.route("/")
 def greet_all():
     try:
