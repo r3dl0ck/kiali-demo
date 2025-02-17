@@ -25,6 +25,10 @@ def main() -> None:
                         default=int(os.getenv('FLASK_PORT', 8080)),
                         help='Port to run Flask app on')
 
+    parser.add_argument('--host', dest='host', type=str,
+                        default='0.0.0.0',
+                        help='Host IP to listen on')
+
     parser.add_argument('--log-level', dest='log_level', type=str,
                         default=os.getenv('LOG_LEVEL', 'INFO').upper(),
                         help='Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)')
@@ -34,4 +38,4 @@ def main() -> None:
     # Configure logging
     logging.basicConfig(level=args.log_level)
 
-    czech_app.run(port=args.flask_port, debug=args.flask_debug, use_reloader=False)
+    czech_app.run(host=args.host, port=args.flask_port, debug=args.flask_debug, use_reloader=False)
