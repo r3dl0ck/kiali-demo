@@ -2,7 +2,7 @@ FROM python:3.13-slim-bookworm
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 RUN apt-get update \
-    && apt-get install -y curl \
+    && apt-get install -y curl dnsutils \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the project into the image
