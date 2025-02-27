@@ -24,10 +24,17 @@ def spanish_hello():
 def spanish_chained():
     try:
         logger.debug(f"Czech service: {czech_svc}")
-        czech_response = requests.get(czech_svc)
+        czech_response = requests.get(czech_svc, timeout=timeout)
+        czech_response.raise_for_status()
         czech_message = czech_response.text
         logger.debug(f"Received response from Czech service: {czech_message}")
         return f"{hello()} -> {czech_message}"
+    except requests.exceptions.Timeout:
+        logger.info('Request timed out.')
+        return f"Operation timed out after {timeout}s", 408
+    except requests.exceptions.HTTPError as e:
+        logger.exception(f"HTTP error connecting to Czech service: {e}")
+        return f"HTTP error connecting to Czech service: {e}", 500
     except requests.exceptions.RequestException as e:
         logger.exception("Error connecting to Czech service")
         return f"Error connecting to Czech service: {e}", 500
@@ -45,6 +52,10 @@ def main() -> None:
                         default=int(os.getenv('FLASK_PORT', 8080)),
                         help='Port to run Flask app on')
 
+    parser.add_argument('--timeout', dest='timeout', type=int,
+                        default=int(os.getenv('TIMEOUT', 5)),
+                        help='Timeout for requests to other services')
+
     parser.add_argument('--host', dest='host', type=str,
                         default='0.0.0.0',
                         help='Host IP to listen on')
@@ -61,10 +72,12 @@ def main() -> None:
 
     # Configure logging
     logging.basicConfig(level=args.log_level)
-    logger.info(f"Spanish service starting up with Czech service URL: {args.czech_svc}")
+    logger.info(f"Spanish service starting up with Czech service URL: {args.czech_svc}, timeout: {args.timeout}")
 
     global czech_svc
+    global timeout
     czech_svc = args.czech_svc
+    timeout = args.timeout
 
 
     spanish_app.run(host=args.host, port=args.flask_port, debug=args.flask_debug, use_reloader=False)
