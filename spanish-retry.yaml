@@ -1,0 +1,18 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: spanish-vs
+spec:
+  hosts:
+  - "spanish"
+  http:
+  - route:
+    - destination:
+        host: spanish
+        port:
+          number: 8080
+    retries:
+      attempts: 10
+      perTryTimeout: 1s
+      retryOn: 5xx
