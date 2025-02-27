@@ -1,0 +1,19 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: czech-vs
+spec:
+  hosts:
+  - "czech"
+  http:
+  - route:
+    - destination:
+        host: czech
+        port:
+          number: 8080
+    fault:
+      delay:
+        fixedDelay: 10s
+        percentage:
+          value: 50

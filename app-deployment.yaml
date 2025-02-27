@@ -87,7 +87,7 @@ spec:
     spec:
       containers:
       - name: spanish
-        image: docker.io/devopstestaccount/kialidemo:1.0
+        image: docker.io/devopstestaccount/kialidemo:1.1
         command: ["uv", "run", "spanish-app"]
         imagePullPolicy: Always
         ports:
