@@ -38,4 +38,7 @@ Chained: Hello World! -> Hello Mundo! -> Ahoj světe!
 ```
 $ docker build . -t docker.io/devopstestaccount/kialidemo:1.0
 $ docker push docker.io/devopstestaccount/kialidemo:1.0
+
+$ docker build . -t quay.io/mmqaz/kialidemo:0.0
+$ docker push quay.io/mmqaz/kialidemo:0.0
 ```
